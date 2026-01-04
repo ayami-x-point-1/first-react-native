@@ -3,3 +3,5 @@ export { Input } from './Input';
 export { Dropdown } from './Dropdown';
 export { ListItem } from './List';
 export { Card } from './Card';
+export { TabBar, TabBarItem } from './TabBar';
+export { AppBar } from './AppBar';
