@@ -2,7 +2,6 @@ import { View, Text, Image, ImageSourcePropType, Pressable, PressableProps } fro
 import { ReactNode } from 'react';
 
 type CardVariant = 'big' | 'medium' | 'small' | 'horizontal' | 'grid-short' | 'grid-long' | 'category';
-type CategoryType = 'burgers' | 'pizza' | 'sandwich';
 
 type CardProps = PressableProps & {
   variant?: CardVariant;
@@ -11,8 +10,59 @@ type CardProps = PressableProps & {
   subtitle?: string;
   price?: string;
   rating?: number;
-  category?: CategoryType;
   badge?: ReactNode;
+};
+
+const variantStyles: Record<CardVariant, {
+  container: string;
+  image: string;
+  title: string;
+  numberOfLines: number;
+  contentContainer?: string;
+}> = {
+  big: {
+    container: 'w-[305px]',
+    image: 'h-[200px]',
+    title: 'text-headline',
+    numberOfLines: 2,
+  },
+  medium: {
+    container: 'w-[205px]',
+    image: 'h-[160px]',
+    title: 'text-subhead',
+    numberOfLines: 2,
+  },
+  small: {
+    container: 'w-[145px]',
+    image: 'h-[145px]',
+    title: 'text-subhead',
+    numberOfLines: 2,
+  },
+  horizontal: {
+    container: 'flex-row h-[120px]',
+    image: 'w-[120px] h-full',
+    title: 'text-headline',
+    numberOfLines: 2,
+    contentContainer: 'flex-1',
+  },
+  'grid-short': {
+    container: 'w-[145px]',
+    image: 'h-[145px]',
+    title: 'text-subhead',
+    numberOfLines: 2,
+  },
+  'grid-long': {
+    container: 'w-[145px]',
+    image: 'h-[200px]',
+    title: 'text-subhead',
+    numberOfLines: 2,
+  },
+  category: {
+    container: 'w-[100px]',
+    image: 'h-[100px]',
+    title: 'text-subhead',
+    numberOfLines: 1,
+  },
 };
 
 export function Card({
@@ -22,57 +72,19 @@ export function Card({
   subtitle,
   price,
   rating,
-  category,
   badge,
   ...props
 }: CardProps) {
-  const isHorizontal = variant === 'horizontal';
-  const isBig = variant === 'big';
-  const isMedium = variant === 'medium';
-  const isSmall = variant === 'small';
-  const isGridShort = variant === 'grid-short';
-  const isGridLong = variant === 'grid-long';
-  const isCategory = variant === 'category';
-
+  const styles = variantStyles[variant];
   const imageSource = typeof image === 'string' ? { uri: image } : image;
 
   return (
     <Pressable
-      className={`bg-white rounded-2xl overflow-hidden ${
-        isHorizontal
-          ? 'flex-row h-[120px]'
-          : isBig
-          ? 'w-[305px]'
-          : isMedium
-          ? 'w-[205px]'
-          : isSmall || isGridShort
-          ? 'w-[145px]'
-          : isGridLong
-          ? 'w-[145px]'
-          : isCategory
-          ? 'w-[100px]'
-          : ''
-      }`}
+      className={`bg-white rounded-2xl overflow-hidden ${styles.container}`}
       {...props}
     >
       {image && (
-        <View
-          className={`${
-            isHorizontal
-              ? 'w-[120px] h-full'
-              : isBig
-              ? 'h-[200px]'
-              : isMedium
-              ? 'h-[160px]'
-              : isSmall || isGridShort
-              ? 'h-[145px]'
-              : isGridLong
-              ? 'h-[200px]'
-              : isCategory
-              ? 'h-[100px]'
-              : ''
-          }`}
-        >
+        <View className={styles.image}>
           <Image
             source={imageSource}
             className="w-full h-full"
@@ -86,12 +98,10 @@ export function Card({
         </View>
       )}
 
-      <View className={`p-3 ${isHorizontal ? 'flex-1' : ''}`}>
+      <View className={`p-3 ${styles.contentContainer || ''}`}>
         <Text
-          className={`${
-            isBig || isHorizontal ? 'text-headline' : 'text-subhead'
-          } text-text-primary`}
-          numberOfLines={isCategory ? 1 : 2}
+          className={`${styles.title} text-text-primary`}
+          numberOfLines={styles.numberOfLines}
         >
           {title}
         </Text>

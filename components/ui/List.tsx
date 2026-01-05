@@ -3,6 +3,10 @@ import { ReactNode } from 'react';
 
 type ListItemVariant = 'icon-text' | 'icon-text-with-icons' | 'setting-icon' | 'setting-toggle';
 
+const SWITCH_TRACK_COLOR_FALSE = '#C1C7D0'; // neutral-50
+const SWITCH_TRACK_COLOR_TRUE = '#FF8B00'; // primary-500
+const SWITCH_THUMB_COLOR = '#FFFFFF'; // neutral-0
+
 type ListItemProps = PressableProps & {
   variant?: ListItemVariant;
   icon?: ReactNode;
@@ -47,12 +51,12 @@ export function ListItem({
         )}
       </View>
 
-      {variant === 'setting-toggle' && onToggleChange ? (
+      {variant === 'setting-toggle' ? (
         <Switch
           value={toggleValue}
           onValueChange={onToggleChange}
-          trackColor={{ false: '#C1C7D0', true: '#FF8B00' }}
-          thumbColor="#FFFFFF"
+          trackColor={{ false: SWITCH_TRACK_COLOR_FALSE, true: SWITCH_TRACK_COLOR_TRUE }}
+          thumbColor={SWITCH_THUMB_COLOR}
         />
       ) : rightText ? (
         <Text className="text-caption-1 text-neutral-200">
