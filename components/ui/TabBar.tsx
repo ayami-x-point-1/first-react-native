@@ -20,6 +20,10 @@ export function TabBarItem({
     <Pressable
       className="flex-1 items-center justify-center py-2 relative"
       onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ selected: isActive }}
+      accessibilityHint={hasNotification ? '通知があります' : undefined}
     >
       <View className="relative">
         <View className={isActive ? 'opacity-100' : 'opacity-50'}>
