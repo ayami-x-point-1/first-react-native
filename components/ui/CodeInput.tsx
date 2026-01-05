@@ -1,27 +1,27 @@
 import { View, TextInput, TextInputProps } from 'react-native';
-import { useRef, useState } from 'react';
+import { useState, useCallback, ReactElement } from 'react';
 
 type CodeInputProps = Omit<TextInputProps, 'maxLength'> & {
   length?: number;
   onComplete?: (code: string) => void;
 };
 
-export function CodeInput({ length = 4, onComplete, ...props }: CodeInputProps) {
+export function CodeInput({ length = 4, onComplete, ...props }: CodeInputProps): ReactElement {
+  const validLength = Math.max(1, length);
   const [code, setCode] = useState('');
-  const inputRefs = useRef<(TextInput | null)[]>([]);
 
-  const handleChangeText = (text: string) => {
+  const handleChangeText = useCallback((text: string): void => {
     const numericText = text.replace(/[^0-9]/g, '');
     setCode(numericText);
 
-    if (numericText.length === length && onComplete) {
+    if (numericText.length === validLength && onComplete) {
       onComplete(numericText);
     }
-  };
+  }, [validLength, onComplete]);
 
   return (
     <View className="flex-row gap-3">
-      {Array.from({ length }).map((_, index) => {
+      {Array.from({ length: validLength }).map((_, index) => {
         const digit = code[index] || '';
         const isFilled = digit !== '';
 
@@ -34,12 +34,14 @@ export function CodeInput({ length = 4, onComplete, ...props }: CodeInputProps) 
           >
             {index === 0 && (
               <TextInput
-                ref={(ref) => (inputRefs.current[0] = ref)}
                 className="absolute opacity-0"
                 keyboardType="number-pad"
-                maxLength={length}
+                maxLength={validLength}
                 value={code}
                 onChangeText={handleChangeText}
+                accessibilityLabel="認証コード入力"
+                accessibilityHint={`${validLength}桁の数字を入力してください`}
+                accessibilityLiveRegion="polite"
                 {...props}
               />
             )}

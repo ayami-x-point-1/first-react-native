@@ -1,5 +1,5 @@
 import { Pressable, Text, PressableProps } from 'react-native';
-import { ReactNode } from 'react';
+import { ReactNode, ReactElement } from 'react';
 
 type SocialProvider = 'facebook' | 'google';
 
@@ -8,7 +8,7 @@ type SocialButtonProps = PressableProps & {
   icon?: ReactNode;
 };
 
-export function SocialButton({ provider, icon, ...props }: SocialButtonProps) {
+export function SocialButton({ provider, icon, ...props }: SocialButtonProps): ReactElement {
   const isFacebook = provider === 'facebook';
   const isGoogle = provider === 'google';
 
@@ -20,9 +20,14 @@ export function SocialButton({ provider, icon, ...props }: SocialButtonProps) {
   return (
     <Pressable
       className={`h-12 rounded-lg flex-row items-center justify-center gap-2 ${bgColor} ${borderColor}`}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      style={(state) => ({
+        opacity: state.pressed ? 0.7 : 1,
+      })}
       {...props}
     >
-      {icon && icon}
+      {icon}
       <Text className={`text-body font-dm-sans-medium ${textColor}`}>
         {label}
       </Text>

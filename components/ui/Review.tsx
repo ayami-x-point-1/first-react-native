@@ -1,5 +1,5 @@
 import { View, Text, Image, ImageSourcePropType } from 'react-native';
-import { ReactNode } from 'react';
+import { ReactNode, ReactElement } from 'react';
 
 type ReviewProps = {
   userName: string;
@@ -19,8 +19,8 @@ export function Review({
   comment,
   images = [],
   verifiedBadge,
-}: ReviewProps) {
-  const avatarSource = typeof userAvatar === 'string' ? { uri: userAvatar } : userAvatar;
+}: ReviewProps): ReactElement {
+  const validRating = Math.max(0, Math.min(5, rating));
   const hasImages = images.length > 0;
 
   return (
@@ -28,9 +28,11 @@ export function Review({
       <View className="flex-row items-center gap-3 mb-3">
         {userAvatar && (
           <Image
-            source={avatarSource}
+            source={typeof userAvatar === 'string' ? { uri: userAvatar } : userAvatar}
             className="w-10 h-10 rounded-full"
             resizeMode="cover"
+            accessibilityLabel={`${userName}のアバター画像`}
+            accessibilityRole="image"
           />
         )}
         <View className="flex-1">
@@ -47,9 +49,9 @@ export function Review({
         <View className="flex-row gap-1">
           {Array.from({ length: 5 }).map((_, index) => (
             <Text
-              key={index}
+              key={`star-${index}`}
               className={`text-caption-1 ${
-                index < rating ? 'text-primary-500' : 'text-neutral-50'
+                index < validRating ? 'text-primary-500' : 'text-neutral-50'
               }`}
             >
               ★
@@ -66,12 +68,15 @@ export function Review({
         <View className="flex-row gap-2">
           {images.slice(0, 3).map((image, index) => {
             const imageSource = typeof image === 'string' ? { uri: image } : image;
+            const imageKey = typeof image === 'string' ? image : `image-${index}`;
             return (
               <Image
-                key={index}
+                key={imageKey}
                 source={imageSource}
                 className="w-20 h-20 rounded-lg"
                 resizeMode="cover"
+                accessibilityLabel={`レビュー画像 ${index + 1}`}
+                accessibilityRole="image"
               />
             );
           })}
