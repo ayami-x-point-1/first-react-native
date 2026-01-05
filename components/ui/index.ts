@@ -5,3 +5,6 @@ export { ListItem } from './List';
 export { Card } from './Card';
 export { TabBar, TabBarItem } from './TabBar';
 export { AppBar } from './AppBar';
+export { SocialButton } from './SocialButton';
+export { CodeInput } from './CodeInput';
+export { Review } from './Review';
