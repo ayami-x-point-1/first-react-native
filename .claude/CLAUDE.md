@@ -90,3 +90,15 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - propsのインターフェースを明確に定義する
 - 適切な粒度でコンポーネントを分割する
 - 再利用可能な設計を心がける
+
+## プランファイル
+
+プランファイルは必ずプロジェクト内の `.claude/plans/` ディレクトリに作成すること。
+`~/.claude/plans/` には作成しない。
+
+### プランファイルの場所
+- 正しい場所: `/Users/ayami/Documents/sandbox/first-react-native/.claude/plans/`
+- 間違った場所: `~/.claude/plans/`
+
+### 再起動後の継続方法
+再起動後に作業を継続する場合は、プロジェクト内のプランファイル（`.claude/plans/`内）を読み込んで実行する。
