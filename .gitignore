@@ -44,3 +44,7 @@ app-example
 
 # claude
 .claude/plans/**/*.*
+
+# storybook
+*storybook.log
+storybook-static

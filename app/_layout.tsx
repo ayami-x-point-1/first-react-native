@@ -4,6 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts, DMSans_400Regular, DMSans_500Medium, DMSans_700Bold } from '@expo-google-fonts/dm-sans';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import StorybookUIRoot from '../.rnstorybook';
+
+const STORYBOOK_ENABLED = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true';
 
 // SplashScreenの自動非表示を防ぐ（エラーハンドリング付き）
 SplashScreen.preventAutoHideAsync().catch((error) => {
@@ -31,6 +34,10 @@ export default function RootLayout() {
 
   if (!fontsLoaded && !fontError) {
     return null;
+  }
+
+  if (STORYBOOK_ENABLED) {
+    return <StorybookUIRoot />;
   }
 
   return (

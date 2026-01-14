@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
+    './app/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}',
+    './.rnstorybook/**/*.{js,jsx,ts,tsx}',
   ],
-  presets: [require("nativewind/preset")],
+  presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
@@ -79,14 +80,78 @@ module.exports = {
         'dm-sans-bold': ['DMSans_700Bold'],
       },
       fontSize: {
-        'heading-1': ['34px', { lineHeight: '42px', letterSpacing: '0.22px', fontWeight: '500', fontFamily: 'DMSans_500Medium' }],
-        'heading-2': ['28px', { lineHeight: '36px', letterSpacing: '0.18px', fontWeight: '700', fontFamily: 'DMSans_700Bold' }],
-        'heading-3': ['24px', { lineHeight: '32px', letterSpacing: '0.14px', fontWeight: '700', fontFamily: 'DMSans_700Bold' }],
-        'headline': ['30px', { lineHeight: '38px', letterSpacing: '0.32px', fontWeight: '700', fontFamily: 'DMSans_700Bold' }],
-        'body': ['14px', { lineHeight: '24px', letterSpacing: '-0.4px', fontWeight: '400', fontFamily: 'DMSans_400Regular' }],
-        'subhead': ['20px', { lineHeight: '20px', letterSpacing: '0.44px', fontWeight: '500', fontFamily: 'DMSans_500Medium' }],
-        'caption-1': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400', fontFamily: 'DMSans_400Regular' }],
-        'caption-2': ['12px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '500', fontFamily: 'DMSans_500Medium' }],
+        'heading-1': [
+          '34px',
+          {
+            lineHeight: '42px',
+            letterSpacing: '0.22px',
+            fontWeight: '500',
+            fontFamily: 'DMSans_500Medium',
+          },
+        ],
+        'heading-2': [
+          '28px',
+          {
+            lineHeight: '36px',
+            letterSpacing: '0.18px',
+            fontWeight: '700',
+            fontFamily: 'DMSans_700Bold',
+          },
+        ],
+        'heading-3': [
+          '24px',
+          {
+            lineHeight: '32px',
+            letterSpacing: '0.14px',
+            fontWeight: '700',
+            fontFamily: 'DMSans_700Bold',
+          },
+        ],
+        headline: [
+          '30px',
+          {
+            lineHeight: '38px',
+            letterSpacing: '0.32px',
+            fontWeight: '700',
+            fontFamily: 'DMSans_700Bold',
+          },
+        ],
+        body: [
+          '14px',
+          {
+            lineHeight: '24px',
+            letterSpacing: '-0.4px',
+            fontWeight: '400',
+            fontFamily: 'DMSans_400Regular',
+          },
+        ],
+        subhead: [
+          '20px',
+          {
+            lineHeight: '20px',
+            letterSpacing: '0.44px',
+            fontWeight: '500',
+            fontFamily: 'DMSans_500Medium',
+          },
+        ],
+        'caption-1': [
+          '16px',
+          {
+            lineHeight: '24px',
+            letterSpacing: '0px',
+            fontWeight: '400',
+            fontFamily: 'DMSans_400Regular',
+          },
+        ],
+        'caption-2': [
+          '12px',
+          {
+            lineHeight: '20px',
+            letterSpacing: '0px',
+            fontWeight: '500',
+            fontFamily: 'DMSans_500Medium',
+          },
+        ],
       },
     },
   },
