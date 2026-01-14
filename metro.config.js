@@ -7,14 +7,18 @@ const {
 
 const config = getDefaultConfig(__dirname);
 
+// Metro の resolver 設定はトップレベルの config に定義する
+config.resolver = {
+  ...(config.resolver || {}),
+  extraNodeModules: {
+    ...((config.resolver && config.resolver.extraNodeModules) || {}),
+    '@': path.resolve(__dirname), // プロジェクトルートを指定
+  },
+};
+
 module.exports = withStorybook(
   withNativeWind(config, {
     input: './global.css',
-    resolver: {
-      extraNodeModules: {
-        '@': path.resolve(__dirname), // プロジェクトルートを指定
-      },
-    },
   }),
   {
     enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true',
