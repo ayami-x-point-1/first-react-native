@@ -1,5 +1,5 @@
-import { View, TextInput, TextInputProps, Text } from 'react-native';
 import { ReactNode, useState } from 'react';
+import { Text, TextInput, TextInputProps, View } from 'react-native';
 
 type InputProps = TextInputProps & {
   label?: string;
@@ -8,21 +8,27 @@ type InputProps = TextInputProps & {
   error?: string;
 };
 
-const PLACEHOLDER_COLOR = '#A5ADBA'; // neutral-70
+const PLACEHOLDER_COLOR = '#7A869A80'; // Neutral 100
 
-export function Input({ label, leftIcon, rightIcon, error, ...props }: InputProps) {
+export function Input({
+  label,
+  leftIcon,
+  rightIcon,
+  error,
+  ...props
+}: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
     <View className="gap-2">
-      {label && (
-        <Text className="text-subhead text-text-primary">
-          {label}
-        </Text>
-      )}
-      <View className={`flex-row items-center h-11 rounded-xl bg-neutral-30 px-4 gap-2 ${
-        isFocused ? 'border-2 border-primary-500' : 'border-2 border-transparent'
-      }`}>
+      {label && <Text className="text-subhead text-neutral-50">{label}</Text>}
+      <View
+        className={`flex-row items-center h-11 rounded-xl bg-neutral-42 px-4 gap-2 ${
+          isFocused
+            ? 'border-2 border-primary-500'
+            : 'border-2 border-transparent'
+        }`}
+      >
         {leftIcon && <View>{leftIcon}</View>}
         <TextInput
           className="flex-1 text-body text-text-primary"
