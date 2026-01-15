@@ -1,5 +1,5 @@
-import { View, Text, Pressable } from 'react-native';
 import { ReactNode } from 'react';
+import { Pressable, Text, View } from 'react-native';
 
 type AppBarProps = {
   title?: string;
@@ -27,7 +27,7 @@ export function AppBar({
   return (
     <View
       className={`flex-row items-center justify-between h-14 px-4 ${
-        isTransparent ? 'bg-transparent' : 'bg-white border-b border-neutral-40'
+        isTransparent ? 'bg-transparent' : 'bg-white'
       }`}
     >
       <View className="w-10">
