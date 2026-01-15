@@ -34,6 +34,10 @@ const meta = {
       control: 'text',
       description: 'レビューコメント',
     },
+    likes: {
+      control: 'number',
+      description: 'いいね数',
+    },
   },
   args: {},
 } satisfies Meta<typeof Review>;
@@ -47,6 +51,17 @@ const sampleImages = [
   'https://picsum.photos/200/200?random=1',
   'https://picsum.photos/200/200?random=2',
   'https://picsum.photos/200/200?random=3',
+  'https://picsum.photos/200/200?random=4',
+  'https://picsum.photos/200/200?random=5',
+];
+const sampleImagesMany = [
+  'https://picsum.photos/200/200?random=1',
+  'https://picsum.photos/200/200?random=2',
+  'https://picsum.photos/200/200?random=3',
+  'https://picsum.photos/200/200?random=4',
+  'https://picsum.photos/200/200?random=5',
+  'https://picsum.photos/200/200?random=6',
+  'https://picsum.photos/200/200?random=7',
 ];
 
 /**
@@ -89,21 +104,30 @@ export const AllVariants: Story = {
           rating={5}
           comment="写真の通りでした！大満足です。"
           images={sampleImages}
+          likes={32}
         />
       </View>
       <View>
-        <Text className="text-neutral-900 mb-2 text-sm">認証バッジ付き</Text>
+        <Text className="text-neutral-900 mb-2 text-sm">画像6枚以上（+N表示）</Text>
         <Review
           userName="鈴木 一郎"
           userAvatar={sampleAvatar}
           date="2024年1月12日"
           rating={5}
-          comment="購入して正解でした。"
-          verifiedBadge={
-            <View className="bg-primary-500 px-2 py-0.5 rounded">
-              <Text className="text-white text-xs">認証済み</Text>
-            </View>
-          }
+          comment="たくさん写真を撮りました！"
+          images={sampleImagesMany}
+          likes={45}
+        />
+      </View>
+      <View>
+        <Text className="text-neutral-900 mb-2 text-sm">いいね数のみ</Text>
+        <Review
+          userName="高橋 美咲"
+          userAvatar={sampleAvatar}
+          date="2024年1月11日"
+          rating={4}
+          comment="良い商品でした。"
+          likes={68}
         />
       </View>
     </View>
@@ -146,30 +170,23 @@ export const WithImages: Story = {
     rating: 5,
     comment: '写真の通りでした！大満足です。',
     images: sampleImages,
+    likes: 32,
   },
 };
 
 /**
- * 認証バッジ付き
+ * 画像多数（6枚以上）
  */
-export const WithVerifiedBadge: Story = {
+export const WithManyImages: Story = {
   args: {
     userName: '鈴木 一郎',
     userAvatar: sampleAvatar,
     date: '2024年1月12日',
     rating: 5,
-    comment: '購入して正解でした。おすすめです。',
+    comment: 'たくさん写真を撮りました！どれも素晴らしいです。',
+    images: sampleImagesMany,
+    likes: 45,
   },
-  render: (args) => (
-    <Review
-      {...args}
-      verifiedBadge={
-        <View className="bg-primary-500 px-2 py-0.5 rounded">
-          <Text className="text-white text-xs">認証済み</Text>
-        </View>
-      }
-    />
-  ),
 };
 
 /**
@@ -248,6 +265,21 @@ export const LongComment: Story = {
     rating: 5,
     comment:
       'この商品は本当に素晴らしいです。長年探していた理想的な製品に出会えました。品質も非常に高く、デザインも洗練されていて、毎日使うのが楽しみです。配送も迅速で、梱包も丁寧でした。価格は少し高めですが、その価値は十分にあると思います。友人にもおすすめしたいと思います。',
+    likes: 128,
+  },
+};
+
+/**
+ * いいね数付き
+ */
+export const WithLikes: Story = {
+  args: {
+    userName: '山本 健太',
+    userAvatar: sampleAvatar,
+    date: '2024年1月5日',
+    rating: 5,
+    comment: '最高の商品です！みんなにおすすめしたい。',
+    likes: 68,
   },
 };
 
@@ -282,11 +314,7 @@ export const InProductReviews: Story = {
           rating={5}
           comment="とても良い商品でした。品質も高く、使いやすいです。リピート購入を検討しています。"
           images={sampleImages}
-          verifiedBadge={
-            <View className="bg-primary-500 px-2 py-0.5 rounded">
-              <Text className="text-white text-xs">認証済み</Text>
-            </View>
-          }
+          likes={95}
         />
 
         <Review
@@ -295,6 +323,7 @@ export const InProductReviews: Story = {
           date="2024年1月14日"
           rating={4}
           comment="満足しています。配送も早くて助かりました。"
+          likes={42}
         />
 
         <Review
@@ -304,6 +333,7 @@ export const InProductReviews: Story = {
           rating={5}
           comment="写真の通りでした！大満足です。"
           images={sampleImages}
+          likes={68}
         />
       </View>
     </View>
@@ -334,6 +364,7 @@ export const InRestaurantReviews: Story = {
           rating={5}
           comment="料理がとても美味しく、雰囲気も良かったです。また来たいと思います。"
           images={sampleImages}
+          likes={87}
         />
 
         <Review
@@ -342,6 +373,7 @@ export const InRestaurantReviews: Story = {
           date="2024年1月12日"
           rating={4}
           comment="サービスが素晴らしかったです。価格も妥当だと思います。"
+          likes={54}
         />
 
         <Review
@@ -350,6 +382,7 @@ export const InRestaurantReviews: Story = {
           date="2024年1月10日"
           rating={5}
           comment="おすすめのお店です。予約して行くことをお勧めします。"
+          likes={102}
         />
       </View>
     </View>
@@ -380,11 +413,7 @@ export const InHotelReviews: Story = {
           rating={5}
           comment="部屋が清潔で、スタッフの対応も素晴らしかったです。朝食も美味しかったです。"
           images={sampleImages}
-          verifiedBadge={
-            <View className="bg-green-500 px-2 py-0.5 rounded">
-              <Text className="text-white text-xs">宿泊済み</Text>
-            </View>
-          }
+          likes={112}
         />
 
         <Review
@@ -393,11 +422,7 @@ export const InHotelReviews: Story = {
           date="2024年1月13日"
           rating={4}
           comment="立地が良く、観光に便利でした。また利用したいです。"
-          verifiedBadge={
-            <View className="bg-green-500 px-2 py-0.5 rounded">
-              <Text className="text-white text-xs">宿泊済み</Text>
-            </View>
-          }
+          likes={73}
         />
 
         <Review
@@ -407,6 +432,7 @@ export const InHotelReviews: Story = {
           rating={5}
           comment="価格以上の価値がありました。設備も充実していて快適でした。"
           images={sampleImages}
+          likes={95}
         />
       </View>
     </View>
@@ -474,5 +500,7 @@ export const Playground: Story = {
     date: '2024年1月15日',
     rating: 5,
     comment: 'とても良い商品でした。品質も高く、使いやすいです。',
+    images: sampleImages,
+    likes: 75,
   },
 };
