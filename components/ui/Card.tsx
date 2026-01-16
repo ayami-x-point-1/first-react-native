@@ -145,9 +145,11 @@ export function Card({
                 {status === 'open' ? 'Open' : 'Closed'}
               </Text>
             )}
-            {categories?.map((category) => (
+            {categories?.map((category, index) => (
               <Fragment key={category}>
-                <Text className="text-caption-2 text-neutral-200">•</Text>
+                {(index === 0 && status) || index > 0 ? (
+                  <Text className="text-caption-2 text-neutral-200">•</Text>
+                ) : null}
                 <Text className="text-caption-2 text-neutral-200">
                   {category}
                 </Text>
