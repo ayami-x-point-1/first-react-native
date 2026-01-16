@@ -1,5 +1,6 @@
 import { ListItem } from '@/components/ui';
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { fn } from 'storybook/test';
 
@@ -17,7 +18,12 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['icon-text', 'icon-text-with-icons', 'setting-icon', 'setting-toggle'],
+      options: [
+        'icon-text',
+        'icon-text-with-icons',
+        'setting-icon',
+        'setting-toggle',
+      ],
       description: 'リストアイテムのスタイルバリアント',
     },
     title: {
@@ -57,8 +63,10 @@ export const AllVariants: Story = {
   },
   render: () => (
     <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
-        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">Icon Text</Text>
+      <View className="bg-white overflow-hidden">
+        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">
+          Icon Text
+        </Text>
         <ListItem
           variant="icon-text"
           icon={<Text className="text-xl">🏠</Text>}
@@ -67,8 +75,10 @@ export const AllVariants: Story = {
         />
       </View>
 
-      <View className="bg-white rounded-xl overflow-hidden">
-        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">Icon Text with Icons</Text>
+      <View className="bg-white overflow-hidden">
+        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">
+          Icon Text with Icons
+        </Text>
         <ListItem
           variant="icon-text-with-icons"
           icon={<Text className="text-xl">📧</Text>}
@@ -78,8 +88,10 @@ export const AllVariants: Story = {
         />
       </View>
 
-      <View className="bg-white rounded-xl overflow-hidden">
-        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">Setting Icon</Text>
+      <View className="bg-white overflow-hidden">
+        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">
+          Setting Icon
+        </Text>
         <ListItem
           variant="setting-icon"
           icon={<Text className="text-xl">⚙️</Text>}
@@ -90,8 +102,10 @@ export const AllVariants: Story = {
         />
       </View>
 
-      <View className="bg-white rounded-xl overflow-hidden">
-        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">Setting Toggle</Text>
+      <View className="bg-white overflow-hidden">
+        <Text className="text-neutral-900 mb-2 text-sm px-4 pt-2">
+          Setting Toggle
+        </Text>
         <ListItem
           variant="setting-toggle"
           icon={<Text className="text-xl">🔔</Text>}
@@ -114,7 +128,7 @@ export const IconText: Story = {
     title: 'ホーム',
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem
         {...args}
         icon={<Text className="text-xl">🏠</Text>}
@@ -133,7 +147,7 @@ export const IconTextWithIcons: Story = {
     title: 'メッセージ',
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem
         {...args}
         icon={<Text className="text-xl">📧</Text>}
@@ -154,7 +168,7 @@ export const SettingIcon: Story = {
     subtitle: 'プロフィールとセキュリティ',
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem
         {...args}
         icon={<Text className="text-xl">⚙️</Text>}
@@ -176,7 +190,7 @@ export const SettingToggle: Story = {
     toggleValue: true,
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem
         {...args}
         icon={<Text className="text-xl">🔔</Text>}
@@ -195,7 +209,7 @@ export const WithRightText: Story = {
     title: '言語',
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem
         {...args}
         icon={<Text className="text-xl">🌐</Text>}
@@ -215,7 +229,7 @@ export const WithoutIcon: Story = {
     title: 'テキストのみ',
   },
   render: (args) => (
-    <View className="bg-white rounded-xl overflow-hidden">
+    <View className="bg-white overflow-hidden">
       <ListItem {...args} onPress={fn()} />
     </View>
   ),
@@ -231,41 +245,40 @@ export const InMenu: Story = {
   },
   render: () => (
     <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
+      <View className="bg-white overflow-hidden">
         <Text className="text-neutral-900 text-base font-semibold px-4 py-3">
           メインメニュー
         </Text>
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🏠</Text>}
-          title="ホーム"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">👤</Text>}
-          title="プロフィール"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">⚙️</Text>}
-          title="設定"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">❓</Text>}
-          title="ヘルプ"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
+        <View className="gap-3">
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🏠</Text>}
+            title="ホーム"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">👤</Text>}
+            title="プロフィール"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">⚙️</Text>}
+            title="設定"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">❓</Text>}
+            title="ヘルプ"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+        </View>
       </View>
     </View>
   ),
@@ -281,45 +294,44 @@ export const InSettings: Story = {
   },
   render: () => (
     <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
+      <View className="bg-white overflow-hidden">
         <Text className="text-neutral-900 text-base font-semibold px-4 py-3">
           設定
         </Text>
-        <ListItem
-          variant="setting-icon"
-          icon={<Text className="text-xl">👤</Text>}
-          title="アカウント"
-          subtitle="プロフィール、メールアドレス"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-icon"
-          icon={<Text className="text-xl">🔒</Text>}
-          title="プライバシー"
-          subtitle="データとセキュリティ"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">🔔</Text>}
-          title="通知"
-          subtitle="プッシュ通知を受け取る"
-          toggleValue={true}
-          onToggleChange={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">🌙</Text>}
-          title="ダークモード"
-          subtitle="ダークテーマを使用"
-          toggleValue={false}
-          onToggleChange={fn()}
-        />
+        <View className="gap-3">
+          <ListItem
+            variant="setting-icon"
+            icon={<Text className="text-xl">👤</Text>}
+            title="アカウント"
+            subtitle="プロフィール、メールアドレス"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="setting-icon"
+            icon={<Text className="text-xl">🔒</Text>}
+            title="プライバシー"
+            subtitle="データとセキュリティ"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="setting-toggle"
+            icon={<Text className="text-xl">🔔</Text>}
+            title="通知"
+            subtitle="プッシュ通知を受け取る"
+            toggleValue={true}
+            onToggleChange={fn()}
+          />
+          <ListItem
+            variant="setting-toggle"
+            icon={<Text className="text-xl">🌙</Text>}
+            title="ダークモード"
+            subtitle="ダークテーマを使用"
+            toggleValue={false}
+            onToggleChange={fn()}
+          />
+        </View>
       </View>
     </View>
   ),
@@ -335,33 +347,33 @@ export const InLanguageSettings: Story = {
   },
   render: () => (
     <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
+      <View className="bg-white overflow-hidden">
         <Text className="text-neutral-900 text-base font-semibold px-4 py-3">
           言語と地域
         </Text>
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🌐</Text>}
-          title="言語"
-          rightText="日本語"
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🗺️</Text>}
-          title="地域"
-          rightText="日本"
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🕐</Text>}
-          title="タイムゾーン"
-          rightText="JST (UTC+9)"
-          onPress={fn()}
-        />
+        <View className="gap-3">
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🌐</Text>}
+            title="言語"
+            rightText="日本語"
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🗺️</Text>}
+            title="地域"
+            rightText="日本"
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🕐</Text>}
+            title="タイムゾーン"
+            rightText="JST (UTC+9)"
+            onPress={fn()}
+          />
+        </View>
       </View>
     </View>
   ),
@@ -377,40 +389,37 @@ export const InProfile: Story = {
   },
   render: () => (
     <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
+      <View className="bg-white overflow-hidden">
         <View className="items-center py-6 px-4">
           <View className="w-20 h-20 bg-neutral-200 rounded-full mb-3" />
           <Text className="text-neutral-900 text-lg font-semibold">
             山田 太郎
           </Text>
-          <Text className="text-neutral-600 text-sm">
-            yamada@example.com
-          </Text>
+          <Text className="text-neutral-600 text-sm">yamada@example.com</Text>
         </View>
-        <View className="h-px bg-neutral-30" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">✏️</Text>}
-          title="プロフィールを編集"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🔑</Text>}
-          title="パスワードを変更"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="icon-text-with-icons"
-          icon={<Text className="text-xl">🚪</Text>}
-          title="ログアウト"
-          rightIcon={<Text className="text-neutral-400">→</Text>}
-          onPress={fn()}
-        />
+        <View className="gap-3">
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">✏️</Text>}
+            title="プロフィールを編集"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🔑</Text>}
+            title="パスワードを変更"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+          <ListItem
+            variant="icon-text-with-icons"
+            icon={<Text className="text-xl">🚪</Text>}
+            title="ログアウト"
+            rightIcon={<Text className="text-neutral-400">→</Text>}
+            onPress={fn()}
+          />
+        </View>
       </View>
     </View>
   ),
@@ -424,50 +433,56 @@ export const InNotificationSettings: Story = {
     variant: 'setting-toggle',
     title: 'リストアイテム',
   },
-  render: () => (
-    <View className="gap-4">
-      <View className="bg-white rounded-xl overflow-hidden">
-        <Text className="text-neutral-900 text-base font-semibold px-4 py-3">
-          通知設定
-        </Text>
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">📧</Text>}
-          title="メール通知"
-          subtitle="新着メッセージをメールで受け取る"
-          toggleValue={true}
-          onToggleChange={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">🔔</Text>}
-          title="プッシュ通知"
-          subtitle="アプリ内の通知を受け取る"
-          toggleValue={true}
-          onToggleChange={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">🔊</Text>}
-          title="サウンド"
-          subtitle="通知音を再生する"
-          toggleValue={false}
-          onToggleChange={fn()}
-        />
-        <View className="h-px bg-neutral-30 mx-4" />
-        <ListItem
-          variant="setting-toggle"
-          icon={<Text className="text-xl">📳</Text>}
-          title="バイブレーション"
-          subtitle="通知時に振動する"
-          toggleValue={false}
-          onToggleChange={fn()}
-        />
+  render: function NotificationSettingsExample() {
+    const [emailNotification, setEmailNotification] = useState(true);
+    const [pushNotification, setPushNotification] = useState(true);
+    const [sound, setSound] = useState(false);
+    const [vibration, setVibration] = useState(false);
+
+    return (
+      <View className="gap-4">
+        <View className="bg-white overflow-hidden">
+          <Text className="text-neutral-900 text-base font-semibold px-4 py-3">
+            通知設定
+          </Text>
+          <View className="gap-3">
+            <ListItem
+              variant="setting-toggle"
+              icon={<Text className="text-xl">📧</Text>}
+              title="メール通知"
+              subtitle="新着メッセージをメールで受け取る"
+              toggleValue={emailNotification}
+              onToggleChange={setEmailNotification}
+            />
+            <ListItem
+              variant="setting-toggle"
+              icon={<Text className="text-xl">🔔</Text>}
+              title="プッシュ通知"
+              subtitle="アプリ内の通知を受け取る"
+              toggleValue={pushNotification}
+              onToggleChange={setPushNotification}
+            />
+            <ListItem
+              variant="setting-toggle"
+              icon={<Text className="text-xl">🔊</Text>}
+              title="サウンド"
+              subtitle="通知音を再生する"
+              toggleValue={sound}
+              onToggleChange={setSound}
+            />
+            <ListItem
+              variant="setting-toggle"
+              icon={<Text className="text-xl">📳</Text>}
+              title="バイブレーション"
+              subtitle="通知時に振動する"
+              toggleValue={vibration}
+              onToggleChange={setVibration}
+            />
+          </View>
+        </View>
       </View>
-    </View>
-  ),
+    );
+  },
 };
 
 /**

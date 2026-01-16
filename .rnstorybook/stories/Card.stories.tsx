@@ -32,17 +32,26 @@ const meta = {
       control: 'text',
       description: 'カードのタイトル',
     },
-    subtitle: {
-      control: 'text',
-      description: 'サブタイトル',
+    isVerified: {
+      control: 'boolean',
+      description: 'オフィシャルマーク表示',
     },
-    price: {
-      control: 'text',
-      description: '価格表示',
+    status: {
+      control: 'select',
+      options: ['open', 'closed'],
+      description: '営業ステータス',
     },
     rating: {
       control: 'number',
       description: '評価（0-5）',
+    },
+    distance: {
+      control: 'text',
+      description: '距離表示',
+    },
+    deliveryInfo: {
+      control: 'text',
+      description: '配送情報',
     },
   },
   args: { onPress: fn() },
@@ -69,10 +78,13 @@ export const AllVariants: Story = {
         <Card
           variant="big"
           image={sampleImage}
-          title="大きいカード"
-          subtitle="bigバリアント"
-          price="¥1,000"
+          title="Starbucks"
+          isVerified={true}
+          status="open"
+          categories={['Coffee', 'Tea', 'Cake']}
           rating={4.5}
+          distance="1.5km"
+          deliveryInfo="Free Shipping"
           onPress={fn()}
         />
       </View>
@@ -81,10 +93,12 @@ export const AllVariants: Story = {
         <Card
           variant="medium"
           image={sampleImage}
-          title="中サイズカード"
-          subtitle="mediumバリアント"
-          price="¥800"
+          title="Starbucks"
+          isVerified={true}
+          status="open"
+          categories={['Coffee']}
           rating={4.0}
+          distance="2.0km"
           onPress={fn()}
         />
       </View>
@@ -93,8 +107,10 @@ export const AllVariants: Story = {
         <Card
           variant="small"
           image={sampleImage}
-          title="小サイズカード"
-          subtitle="smallバリアント"
+          title="Starbucks"
+          isVerified={true}
+          status="closed"
+          categories={['Coffee']}
           onPress={fn()}
         />
       </View>
@@ -103,10 +119,13 @@ export const AllVariants: Story = {
         <Card
           variant="horizontal"
           image={sampleImage}
-          title="横型カード"
-          subtitle="horizontalバリアント"
-          price="¥1,200"
+          title="Starbucks"
+          isVerified={true}
+          status="open"
+          categories={['Coffee', 'Tea']}
           rating={4.8}
+          distance="0.5km"
+          deliveryInfo="Free Shipping"
           onPress={fn()}
         />
       </View>
@@ -115,7 +134,7 @@ export const AllVariants: Story = {
         <Card
           variant="category"
           image={sampleImage}
-          title="カテゴリ"
+          title="Coffee"
           onPress={fn()}
         />
       </View>
@@ -130,10 +149,13 @@ export const Big: Story = {
   args: {
     variant: 'big',
     image: sampleImage,
-    title: '大きいカード',
-    subtitle: 'bigバリアント',
-    price: '¥1,000',
+    title: 'Starbucks',
+    isVerified: true,
+    status: 'open',
+    categories: ['Coffee', 'Tea', 'Cake'],
     rating: 4.5,
+    distance: '1.5km',
+    deliveryInfo: 'Free Shipping',
   },
 };
 
@@ -144,10 +166,12 @@ export const Medium: Story = {
   args: {
     variant: 'medium',
     image: sampleImage,
-    title: '中サイズカード',
-    subtitle: 'mediumバリアント',
-    price: '¥800',
+    title: 'Starbucks',
+    isVerified: true,
+    status: 'open',
+    categories: ['Coffee'],
     rating: 4.0,
+    distance: '2.0km',
   },
 };
 
@@ -158,8 +182,9 @@ export const Small: Story = {
   args: {
     variant: 'small',
     image: sampleImage,
-    title: '小サイズカード',
-    subtitle: 'smallバリアント',
+    title: 'Starbucks',
+    status: 'closed',
+    categories: ['Coffee'],
   },
 };
 
@@ -170,10 +195,13 @@ export const Horizontal: Story = {
   args: {
     variant: 'horizontal',
     image: sampleImage,
-    title: '横型カード',
-    subtitle: 'horizontalバリアント',
-    price: '¥1,200',
+    title: 'Starbucks',
+    isVerified: true,
+    status: 'open',
+    categories: ['Coffee', 'Tea'],
     rating: 4.8,
+    distance: '0.5km',
+    deliveryInfo: 'Free Shipping',
   },
 };
 
@@ -184,9 +212,9 @@ export const GridShort: Story = {
   args: {
     variant: 'grid-short',
     image: sampleImage,
-    title: 'グリッドカード（短）',
-    price: '¥500',
+    title: 'Starbucks',
     rating: 3.5,
+    distance: '1.0km',
   },
 };
 
@@ -197,9 +225,9 @@ export const GridLong: Story = {
   args: {
     variant: 'grid-long',
     image: sampleImage,
-    title: 'グリッドカード（長）',
-    price: '¥600',
+    title: 'Starbucks',
     rating: 4.2,
+    distance: '1.2km',
   },
 };
 
@@ -210,7 +238,7 @@ export const Category: Story = {
   args: {
     variant: 'category',
     image: sampleImage,
-    title: 'カテゴリ',
+    title: 'Coffee',
   },
 };
 
@@ -221,10 +249,12 @@ export const WithBadge: Story = {
   args: {
     variant: 'medium',
     image: sampleImage,
-    title: 'バッジ付きカード',
-    subtitle: 'NEW',
-    price: '¥1,500',
+    title: 'Starbucks',
+    isVerified: true,
+    status: 'open',
+    categories: ['Coffee', 'Tea'],
     rating: 5.0,
+    distance: '0.8km',
   },
   render: (args) => (
     <Card
@@ -239,6 +269,38 @@ export const WithBadge: Story = {
 };
 
 /**
+ * オフィシャルマークなし
+ */
+export const WithoutVerified: Story = {
+  args: {
+    variant: 'medium',
+    image: sampleImage,
+    title: 'Local Cafe',
+    isVerified: false,
+    status: 'open',
+    categories: ['Coffee'],
+    rating: 3.8,
+    distance: '2.5km',
+  },
+};
+
+/**
+ * Closedステータス
+ */
+export const ClosedStatus: Story = {
+  args: {
+    variant: 'medium',
+    image: sampleImage,
+    title: 'Night Restaurant',
+    isVerified: true,
+    status: 'closed',
+    categories: ['Japanese', 'Sushi'],
+    rating: 4.3,
+    distance: '3.0km',
+  },
+};
+
+/**
  * グリッドレイアウトでの使用例
  */
 export const InGrid: Story = {
@@ -249,22 +311,24 @@ export const InGrid: Story = {
   render: () => (
     <View className="gap-4">
       <View className="bg-neutral-0 p-4 rounded-xl gap-3">
-        <Text className="text-neutral-900 text-base font-semibold">商品一覧</Text>
+        <Text className="text-neutral-900 text-base font-semibold">人気のレストラン</Text>
         <View className="flex-row flex-wrap gap-2">
           <Card
             variant="grid-short"
             image={sampleImage}
-            title="商品1"
-            price="¥500"
-            rating={4.0}
+            title="Starbucks"
+            isVerified={true}
+            rating={4.5}
+            distance="1.0km"
             onPress={fn()}
           />
           <Card
             variant="grid-short"
             image={sampleImage}
-            title="商品2"
-            price="¥600"
-            rating={4.5}
+            title="McDonald's"
+            isVerified={true}
+            rating={4.2}
+            distance="1.5km"
             badge={
               <View className="bg-red-500 px-2 py-1 rounded">
                 <Text className="text-white text-xs font-semibold">SALE</Text>
@@ -275,17 +339,18 @@ export const InGrid: Story = {
           <Card
             variant="grid-short"
             image={sampleImage}
-            title="商品3"
-            price="¥450"
+            title="KFC"
             rating={3.8}
+            distance="2.0km"
             onPress={fn()}
           />
           <Card
             variant="grid-short"
             image={sampleImage}
-            title="商品4"
-            price="¥700"
-            rating={4.7}
+            title="Subway"
+            isVerified={true}
+            rating={4.0}
+            distance="1.8km"
             onPress={fn()}
           />
         </View>
@@ -301,9 +366,12 @@ export const Playground: Story = {
   args: {
     variant: 'medium',
     image: sampleImage,
-    title: 'カードタイトル',
-    subtitle: 'サブタイトル',
-    price: '¥1,000',
+    title: 'Starbucks',
+    isVerified: true,
+    status: 'open',
+    categories: ['Coffee', 'Tea'],
     rating: 4.5,
+    distance: '1.5km',
+    deliveryInfo: 'Free Shipping',
   },
 };
