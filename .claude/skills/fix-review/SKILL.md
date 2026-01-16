@@ -134,19 +134,19 @@ gh repo view --json owner,name
 
 #### 4.4 コミット
 
-承認された場合、HEREDOCを使用してコミットします：
+承認された場合、以下の手順でコミットします：
 
+1. 修正ファイルをステージング：
 ```bash
-git add {修正ファイル} && git commit -m "$(cat <<'EOF'
-レビュー指摘を修正: {修正内容の要約}
+git add {修正ファイル}
+```
 
-- {修正の詳細}
+2. Run /create-commit-message @{レビュアー} to generate a review fix commit message.
 
-Reviewer: @{レビュアー}
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
+3. 生成されたコミットメッセージでコミット実行：
+```bash
+git commit -m "$(cat <<'EOF'
+[生成されたコミットメッセージ]
 EOF
 )"
 ```
